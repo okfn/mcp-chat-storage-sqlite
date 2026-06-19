@@ -15,3 +15,17 @@ persistence on automatically — the gateway discovers it through the
 | `CHAT_STORAGE_SQLITE_PATH` | `chat_history.sqlite3` | DB file path |
 
 No DB server needed.
+
+## Develop / run tests
+
+This package is built with [uv](https://docs.astral.sh/uv/) (`uv_build` backend).
+The `dev` dependency group (pytest) is installed automatically by `uv run`.
+
+```bash
+uv sync          # create the venv and install deps (incl. the dev group)
+uv run pytest    # run the test suite
+uv run pytest -q tests/test_sqlite_storage.py   # a single file
+```
+
+No database server or network is required — the tests use a temporary on-disk
+SQLite file. The same commands run in CI (see `.github/workflows/tests.yml`).
