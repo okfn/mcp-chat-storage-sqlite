@@ -1,0 +1,24 @@
+[project]
+name = "mcp-chat-storage-sqlite"
+version = "0.1.1"
+description = "SQLite storage backend for mcp-chat-gateway conversation history."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []  # uses the stdlib sqlite3 module only
+
+# Discovered by the gateway via the `mcp_chat_storage` entry point group.
+# Installing this package into the gateway's environment turns persistence on.
+[project.entry-points.mcp_chat_storage]
+sqlite = "mcp_chat_storage_sqlite:SqliteChatStorage"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[build-system]
+requires = ["uv_build>=0.10.8,<0.11.0"]
+build-backend = "uv_build"
